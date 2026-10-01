@@ -15,12 +15,10 @@ function formatDate(date, fromFormat, toFormat) {
   const indexYear = fromYYYY === -1 ? fromFormat.indexOf('YY') : fromYYYY;
   const year = dateArr[indexYear];
 
-  if (toFormat.indexOf('YYYY') === -1) {
-    dateArr[indexYear] = year.slice(2, 4);
-  } else {
-    if (dateArr[indexYear].length === 2) {
-      dateArr[indexYear] = year < 30 ? '20' + year : '19' + year;
-    }
+  if (toFormat.includes('YY') && fromFormat.includes('YYYY')) {
+    dateArr[indexYear] = year.slice(-2);
+  } else if (toFormat.includes('YYYY') && fromFormat.includes('YY')) {
+    dateArr[indexYear] = year < 30 ? '20' + year : '19' + year;
   }
 
   const result = [];
